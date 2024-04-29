@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:test_projects/login_screen.dart';
 
 import 'Second.dart';
 
@@ -33,20 +34,48 @@ class First extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
-      body: Center(
-        child: Container(
-          child: ElevatedButton(
-              child: Text(
-                "Go to next screen",
-                style: TextStyle(color: Colors.black, fontSize: 25, fontStyle: FontStyle.normal),
-              ),
-              onPressed: () {
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children:<Widget> [
 
-                //navigate to Second screen
-                Get.to(Second());
-              }
+           Padding(
+            padding: const EdgeInsets.all(8.0),
+
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              alignment: Alignment.center,
+              child: ElevatedButton(
+                  child: Text(
+                    "Go to Second screen",
+                    style: TextStyle(color: Colors.black, fontSize: 25, fontStyle: FontStyle.normal),
+                  ),
+                  onPressed: () {
+
+                    //navigate to Second screen
+                    Get.to(Second());
+                  }
+              ),
+            ),
           ),
-        ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              child: ElevatedButton(
+                  child: Text(
+                    "Go To Login Screen",
+                    style: TextStyle(color: Colors.black, fontSize: 25, fontStyle: FontStyle.normal),
+                  ),
+                  onPressed: () {
+
+                    //navigate to Second screen
+                    Get.to(LoginScreen());
+                  }
+              ),
+            ),
+          ),
+        ],
+
       ),
     );
   }

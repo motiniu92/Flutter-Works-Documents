@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test_projects/main.dart';
 
-class Second extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second Page"),
+        title: Text("Login Page"),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
@@ -40,7 +40,7 @@ class Second extends StatelessWidget {
               width: 250,
               color: Colors.black12,
               child: Text(
-                "Hello Delopers What is the problem, don't wary each problem have a solution in the programing sector",
+                "Called rest api at first login and get data",
                 style: TextStyle(
                     color: Colors.red,
                     fontSize: 20,
