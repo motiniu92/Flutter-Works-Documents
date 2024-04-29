@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:test_projects/main.dart';
+
+import 'main.dart';
 
 class Second extends StatelessWidget {
   @override
@@ -29,7 +29,8 @@ class Second extends StatelessWidget {
                           fontStyle: FontStyle.normal),
                     ),
                     onPressed: () {
-                      Get.to(First());
+                     // Navigator.push(context,
+                       //   MaterialPageRoute(builder: (context) => First()));
                     }),
               ),
             ),
