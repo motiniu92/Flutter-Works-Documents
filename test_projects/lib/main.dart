@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'Second.dart';
+import 'login_screen.dart';
+
 Future<Album> fetchAlbum() async {
   final response = await http
       .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
@@ -33,15 +36,15 @@ class Album {
   factory Album.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {
-      'userId': int userId,
-      'id': int id,
-      'title': String title,
+        'userId': int userId,
+        'id': int id,
+        'title': String title,
       } =>
-          Album(
-            userId: userId,
-            id: id,
-            title: title,
-          ),
+        Album(
+          userId: userId,
+          id: id,
+          title: title,
+        ),
       _ => throw const FormatException('Failed to load album.'),
     };
   }
@@ -69,31 +72,84 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fetch Data Example',
-
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Fetch Data Example'),
-        ),
-        body: Center(
-          child: FutureBuilder<Album>(
-            future: futureAlbum,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(snapshot.data!.title,style: TextStyle(color: Colors.red,
-                    fontSize: 25,
-                    fontStyle: FontStyle.normal),);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
+          backgroundColor: Colors.green,
+          title: const Text('Fetch Data Example',
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.bold)),
 
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
-            },
-          ),
+        ),
+        body: Column(
+          children: <Widget>[
+            Container(
+              color: Colors.black26,
+              width: MediaQuery.of(context).size.width,
+              height: 250,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      child: ElevatedButton(
+                          child: Text(
+                            "Go to Second screen",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 25,
+                                fontStyle: FontStyle.normal),
+                          ),
+                          onPressed: () {
+                            //navigate to Second screen
+                            //Second();
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => new Second()));
+                          }),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width,
+              child: FutureBuilder<Album>(
+                future: futureAlbum,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(
+                      snapshot.data!.title,
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 25,
+                          fontStyle: FontStyle.normal),
+
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+
+                  // By default, show a loading spinner.
+                  return const CircularProgressIndicator();
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
